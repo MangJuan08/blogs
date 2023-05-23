@@ -30,11 +30,11 @@ const Homepage = () => {
       .then((res) => {
        
         if (res.data.login === true && res.data.isAdmin === true) {
-          console.log("success admin");
+       
           localStorage.setItem("token",res.data.token)
           navigate("/admin");
         } else if (res.data.login === true && res.data.isAdmin === false ) {
-          console.log("success user");
+     
           localStorage.setItem("token",res.data.token)
           navigate("/user");
         } else {
