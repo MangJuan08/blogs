@@ -7,6 +7,7 @@ const app = express();
 const port = 3001;
 
 const con = mysql.createConnection({
+  connectionLimit: 100,
   host: "127.0.0.1",
   user: "root",
   password: "",
@@ -19,19 +20,29 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.post("/login", (req, res) => {
- /* con.connect(function (err) {
-    let results = con.query("SELECT * FROM users where username=" + req.body.username);
-      console.log(results)
-  });*/
+  let bodyReq = [];
+  bodyReq = Object.values(req.body);
 
+  let loginDetails = {
+    username: bodyReq[0].username,
+    password: bodyReq[0].password,
+  };
 
-
- let ra = Object.values(req.body);
- console.log(ra)
-
- for (const [key, value] of Object.entries(RangeError)) {
-  console.log(`${key}: ${value}`);
-}
+  con.connect(function (err) {
+    con.query(
+      "SELECT * FROM users where username='" + loginDetails.username + "'",
+      function (error, result, fields) {
+        if (result.length>0) 
+        {
+          res.send("trovato")
+        }
+        else
+        {
+          res.send("non trovato")
+        }
+      }
+    );
+  });
 });
 
 app.listen(port, () =>
