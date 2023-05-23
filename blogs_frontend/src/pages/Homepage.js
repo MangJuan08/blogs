@@ -24,7 +24,15 @@ const Homepage = () => {
       .post("http://localhost:3001/login", {
         body: loginBody,
       })
-      .then((res) => console.log(res));
+      .then((res) => {
+        if (res.data.login === true && res.data.isAdmin === true) {
+          console.log("success admin");
+        } else if (res.data.login === true && res.data.isAdmin === false ) {
+          console.log("success user");
+        } else {
+            console.log(res.data.message)
+        }
+      });
   };
 
   return (
