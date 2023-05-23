@@ -34,8 +34,8 @@ app.post("/login", (req, res) => {
       (error, result, fields) => {
         if (result.length > 0) {
           let results = Object.values(JSON.parse(JSON.stringify(result)));
-          console.log(results[0].idUser)
-          const token = jwt.sign({id:results[0].idUser}, "secretKey", { expiresIn: "15m" });
+         let id = results[0].idUser;
+          const token = jwt.sign({id}, "secretKey", { expiresIn: "10s" });
 
           res.json({
             login:true,
@@ -52,12 +52,11 @@ app.post("/login", (req, res) => {
   });
 });
 
-app.post("/controlAuth", (req, res) => {
-
-});
 
 
-const verifyJWT = () => {
+
+const verifyJWT = (req, res, next) => {
+  console.log(req.headers["access-token"])
   const token = req.headers["access-token"];
   if(!token) {
     return res.json("need token");
@@ -74,6 +73,10 @@ const verifyJWT = () => {
   }
    
 }
+
+app.get("/controlAuth", verifyJWT, (req, res) => {
+  return res.json("authenticated")
+  });
 
 app.listen(port, () =>
   console.log(`Hello world app listening on port ${port}!`)
