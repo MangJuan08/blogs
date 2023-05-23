@@ -2,7 +2,8 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import { Admin } from "./pages/Admin";
-import User from "./pages/User";
+import { User } from "./pages/User";
+
 
 function App() {
   return (
