@@ -19,12 +19,18 @@ export const Admin = () => {
     .catch((err) => console.log(err))
     }
 
+    const logoutAdmin = () => {
+        localStorage.removeItem("token");
+        navigate("/");
+    }
+
     if(token) {
         return (
             <div>
                 <p>Admin</p>
         
             <button onClick={checkAuthentication}>control</button>
+            <button onClick={logoutAdmin}>logout</button>
             </div>
           )
     }

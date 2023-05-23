@@ -35,7 +35,7 @@ app.post("/login", (req, res) => {
         if (result.length > 0) {
           let results = Object.values(JSON.parse(JSON.stringify(result)));
          let id = results[0].idUser;
-          const token = jwt.sign({id}, "secretKey", { expiresIn: "10s" });
+          const token = jwt.sign({id}, "secretKey", { expiresIn: "60m" });
 
           res.json({
             login:true,
