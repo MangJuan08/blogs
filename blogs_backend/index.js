@@ -30,7 +30,7 @@ app.post("/login", (req, res) => {
 
   con.connect((err) => {
     con.query(
-      "SELECT * FROM users where username='" + loginDetails.username + "'",
+      "SELECT * FROM users where username='" + loginDetails.username + "'" + "&& password='"+loginDetails.password+"'",
       (error, result, fields) => {
         if (result.length > 0) {
           let results = Object.values(JSON.parse(JSON.stringify(result)));
@@ -42,6 +42,7 @@ app.post("/login", (req, res) => {
             isAdmin: results[0].userType === "admin" ? true : false,
             results,
             token,
+            id:id
           });
 
         } else {
@@ -53,10 +54,22 @@ app.post("/login", (req, res) => {
 });
 
 
+app.get("/getPosts/:id", (req, res) => {
+let id = 1;
+console.log(req.params)
+  /*con.connect((err) => {
+    con.query(
+      "SELECT * FROM posts where post_iduser='" + id + "'",
+      (error, result, fields) => {
+        res.send(result)
+      }
+    );
+  });*/
+});
 
 
 const verifyJWT = (req, res, next) => {
-  console.log(req.headers["access-token"])
+  
   const token = req.headers["access-token"];
   if(!token) {
     return res.json("need token");

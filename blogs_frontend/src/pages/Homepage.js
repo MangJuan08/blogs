@@ -32,10 +32,12 @@ const Homepage = () => {
         if (res.data.login === true && res.data.isAdmin === true) {
        
           localStorage.setItem("token",res.data.token)
+          localStorage.setItem("idUtente",res.data.id)
           navigate("/admin");
         } else if (res.data.login === true && res.data.isAdmin === false ) {
      
           localStorage.setItem("token",res.data.token)
+          localStorage.setItem("idUtente",res.data.id)
           navigate("/user");
         } else {
             console.log(res.data.message)
@@ -46,7 +48,7 @@ const Homepage = () => {
   return (
     <div>
       <NavbarSection />
-      <div className="container" style={styleHomepage}>
+      <div style={styleHomepage}>
         <LoginSection
           handleSubmit={handleSubmit}
           login={login}

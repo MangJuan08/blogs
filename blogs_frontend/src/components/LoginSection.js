@@ -2,8 +2,54 @@ import React, { useState } from "react";
 
 const LoginSection = ({ handleSubmit, login, setLogin }) => {
   return (
-    <div>
-      <form
+    <div className="container">
+   
+
+      <div className="row">
+        <div className="col-md-4"></div>
+        <div className="col-md-4">
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title text-center">DAJUAN</h5>
+              <br></br>
+              <form
+                className="row gx-3 gy-2 align-items-center"
+                onSubmit={handleSubmit}
+              >
+                <input
+                  className="form-control form-control-lg"
+                  type="text"
+                  placeholder="username"
+                  aria-label=".form-control-lg example"
+                  name="username"
+                  onChange={(e) => setLogin(e.target.value)}
+                ></input>
+                <br></br>
+                <input
+                  className="form-control form-control-lg"
+                  type="password"
+                  placeholder="password"
+                  aria-label=".form-control-lg example"
+                  name="password"
+                  onChange={(e) => setLogin(e.target.value)}
+                ></input>
+                <br></br><br></br><br></br><br></br>
+                <button type="submit" className="btn btn-outline-primary">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default LoginSection;
+
+
+/*   <form
         className="row gx-3 gy-2 align-items-center"
         onSubmit={handleSubmit}
       >
@@ -12,7 +58,7 @@ const LoginSection = ({ handleSubmit, login, setLogin }) => {
             USername
           </label>
           <div className="input-group">
-            <div className="input-group-text">@</div>
+            <div className="input-group-text">USER</div>
             <input
               type="text"
               className="form-control"
@@ -28,12 +74,12 @@ const LoginSection = ({ handleSubmit, login, setLogin }) => {
             Password
           </label>
           <div className="input-group">
-            <div className="input-group-text">@</div>
+            <div className="input-group-text">PASSWORD</div>
             <input
               type="password"
               className="form-control"
               id="Password"
-              placeholder="Username"
+              placeholder="Password"
               name="password"
               onChange={(e) => setLogin(e.target.value)}
             />
@@ -45,8 +91,6 @@ const LoginSection = ({ handleSubmit, login, setLogin }) => {
           </button>
         </div>
       </form>
-    </div>
-  );
-};
-
-export default LoginSection;
+      <br></br>
+      <br></br>
+      <br></br>*/

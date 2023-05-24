@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import axios from "axios";
 import { useNavigate  } from "react-router-dom";
+import { NavbarSection } from '../components/NavbarSection';
 
 export const Admin = () => {
     const navigate = useNavigate();
@@ -24,13 +25,27 @@ export const Admin = () => {
         navigate("/");
     }
 
+    const fetchPosts = () => {
+       let id = localStorage.getItem("idUtente");
+       axios.get(`http://localhost:3001/getPosts/${id}`).then((res) => console.log(res))
+    }
+    
+    useEffect(() => {
+        fetchPosts();
+    }, [])
+    
+
     if(token) {
         return (
             <div>
-                <p>Admin</p>
+               <NavbarSection/>
+            <div className='container'>
+            <br></br><br></br>      <br></br><br></br>
+                <h1>ADMIN</h1>
+                <h4>POSTS BY ADMIN</h4>
         
-            <button onClick={checkAuthentication}>control</button>
-            <button onClick={logoutAdmin}>logout</button>
+    
+            </div>
             </div>
           )
     }
