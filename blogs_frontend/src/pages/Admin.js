@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { NavbarSection } from "../components/NavbarSection";
 import PostsSection from "../components/PostsSection";
 
+
 export const Admin = () => {
   const [posts, setPost] = useState([]);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  
+
   const checkAuthentication = () => {
     axios
       .get("http://localhost:3001/controlAuth", {
@@ -50,6 +51,8 @@ export const Admin = () => {
           <h1>ADMIN</h1>
           <h4>POSTS BY ADMIN</h4>
           {posts.length > 0 ? <PostsSection posts={posts} /> : ""}
+          <br></br><br></br>
+    
         </div>
       </div>
     );
