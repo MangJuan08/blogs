@@ -8,6 +8,7 @@ export const Admin = () => {
   const [posts, setPost] = useState([]);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  
   const checkAuthentication = () => {
     axios
       .get("http://localhost:3001/controlAuth", {
