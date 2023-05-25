@@ -31,10 +31,15 @@ export const Admin = () => {
 
   const fetchPosts = () => {
     let id = localStorage.getItem("idUtente");
-    axios.get(`http://localhost:3001/getPosts/${id}`).then((res) => {
+    axios.get(`http://localhost:3001/getPosts`).then((res) => {
       setPost([res]);
     });
   };
+
+  const refetchPost= () => {
+    setPost([]);
+    fetchPosts();
+  }
 
   useEffect(() => {
     fetchPosts();
@@ -49,7 +54,7 @@ export const Admin = () => {
           <br></br> <br></br>
      
           <h1>POSTS</h1>
-          <button className="btn btn-outline-success sm">Refresh</button>
+          <button className="btn btn-outline-success sm" onClick={refetchPost}>Refresh</button>
          <br></br><br></br>
           {posts.length > 0 ? <PostsSection posts={posts} /> : ""}
           <br></br><br></br>

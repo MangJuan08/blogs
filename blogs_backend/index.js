@@ -54,14 +54,11 @@ app.post("/login", (req, res) => {
 });
 
 
-app.get("/getPosts/:id", (req, res) => {
-
-
-console.log(req.params.id)
+app.get("/getPosts", (req, res) => {
 
   con.connect((err) => {
     con.query(
-      "SELECT * FROM posts where post_iduser='" + req.params.id + "'",
+      "SELECT * FROM posts",
       (error, result, fields) => {
        res.send(result)
       }

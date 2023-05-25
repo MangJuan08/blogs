@@ -11,11 +11,15 @@ const PostsSection = ({ posts }) => {
       {posts[0].data.map((item, i) => {
         return (
           <div className="card" style={styleCards} key={i}>
-            <div className="card-header"><h6>{item.post_titolo}</h6></div>
+            <div className="card-header">
+              <h6>{item.post_titolo}</h6>
+            </div>
             <div className="card-body">
               <p className="card-title">Special title treatment</p>
-              <p className="card-text">{item.post_corpo}</p>
-              <Link to={`http://localhost:3000/singlePost/${item.idpost}`}>click</Link>
+
+              <Link to={`http://localhost:3000/singlePost/${item.idpost}`}>
+                {item.post_corpo.substring(0, 50) + ". . . . . . . . . . "}
+              </Link>
             </div>
             <div className="card-footer text-body-secondary">
               <p>{moment(item.post_date).format("MMMM Do YYYY, h:mm:ss a")}</p>
@@ -28,13 +32,3 @@ const PostsSection = ({ posts }) => {
 };
 
 export default PostsSection;
-
-/* {
-    posts.data.map((item,i) => {
-        return (
-            <li key={i}>{item.post_titolo}</li>
-        )
-    })
-
-
- }*/
