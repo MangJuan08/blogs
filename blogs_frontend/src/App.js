@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import { Admin } from "./pages/Admin";
 import { User } from "./pages/User";
+import SinglePost from "./pages/SinglePost";
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/admin" element={<Admin/>} />
         <Route path="/user" element={<User/>} />
+        <Route path="/singlePost" element={<SinglePost/>}/>
       </Routes>
     </div>
   );

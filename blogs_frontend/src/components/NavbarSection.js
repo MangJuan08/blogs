@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate  } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const NavbarSection = () => {
     const navigate = useNavigate();
@@ -22,10 +23,7 @@ export const NavbarSection = () => {
             <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="prova">Home</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="prova">Features</a>
+                  <Link to="/admin" className="nav-link active" aria-current="page" href="prova">Home</Link>
                 </li>
                 <li className="nav-item">
                  <button onClick={logoutAdmin} className="btn btn-outline-success sm">LOGOUT</button>

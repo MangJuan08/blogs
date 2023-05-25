@@ -47,9 +47,10 @@ export const Admin = () => {
         <div className="container">
           <br></br>
           <br></br> <br></br>
-          <br></br>
-          <h1>ADMIN</h1>
-          <h4>POSTS BY ADMIN</h4>
+     
+          <h1>POSTS</h1>
+          <button className="btn btn-outline-success sm">Refresh</button>
+         <br></br><br></br>
           {posts.length > 0 ? <PostsSection posts={posts} /> : ""}
           <br></br><br></br>
     
