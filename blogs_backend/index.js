@@ -70,6 +70,22 @@ console.log(req.params.id)
 });
 
 
+app.get("/getSinglePost/:id", (req, res) => {
+
+
+console.log(req.params.id)
+
+  con.connect((err) => {
+    con.query(
+      "SELECT * FROM posts where idpost='" + req.params.id + "'",
+      (error, result, fields) => {
+       res.send(result)
+      }
+    );
+  });
+});
+
+
 const verifyJWT = (req, res, next) => {
   
   const token = req.headers["access-token"];

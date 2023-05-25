@@ -15,7 +15,7 @@ const PostsSection = ({ posts }) => {
             <div className="card-body">
               <p className="card-title">Special title treatment</p>
               <p className="card-text">{item.post_corpo}</p>
-              <Link to="/singlePost">click</Link>
+              <Link to={`http://localhost:3000/singlePost/${item.idpost}`}>click</Link>
             </div>
             <div className="card-footer text-body-secondary">
               <p>{moment(item.post_date).format("MMMM Do YYYY, h:mm:ss a")}</p>
