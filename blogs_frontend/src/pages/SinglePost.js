@@ -5,29 +5,27 @@ import axios from "axios";
 
 const SinglePost = () => {
   const [post, setPost] = useState([]);
-  let id = useParams()
+  let id = useParams();
   let val = Object.values(id);
 
   const fetchSinglePost = () => {
     axios.get(`http://localhost:3001/getSinglePost/${val[0]}`).then((res) => {
-setPost(res)
-console.log(res)
+      setPost([res]);
     });
-  }
+  };
 
   useEffect(() => {
- 
-fetchSinglePost();
+    fetchSinglePost();
+  }, []);
 
-  },[])
   return (
     <div>
-          <NavbarSection />
+      <NavbarSection />
       <div className="container">
-      
-        <br></br> <h1>TITLE POST {post.data[0].post_titolo}</h1>
-    <p>{post.data[0].post_corpo}</p>
-   
+        <br></br><br></br>
+        {post.length > 0 ? <h1>{post[0].data[0].post_titolo}</h1> : ""}
+        <br></br><br></br>
+        {post.length > 0 ? <p>{post[0].data[0].post_corpo}</p> : ""}
       </div>
     </div>
   );
