@@ -15,8 +15,6 @@ const PostsSection = ({ posts }) => {
               <h6>{item.post_titolo}</h6>
             </div>
             <div className="card-body">
-              <p className="card-title">Special title treatment</p>
-
               <Link to={`http://localhost:3000/singlePost/${item.idpost}`}>
                 {item.post_corpo.substring(0, 50) + ". . . . . . . . . . "}
               </Link>

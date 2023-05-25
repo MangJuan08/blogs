@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { NavbarSection } from "../components/NavbarSection";
 import PostsSection from "../components/PostsSection";
 
-
 export const Admin = () => {
   const [posts, setPost] = useState([]);
   const navigate = useNavigate();
@@ -24,22 +23,16 @@ export const Admin = () => {
       .catch((err) => console.log(err));
   };
 
-  const logoutAdmin = () => {
-    localStorage.removeItem("token");
-    navigate("/");
-  };
-
   const fetchPosts = () => {
-    let id = localStorage.getItem("idUtente");
     axios.get(`http://localhost:3001/getPosts`).then((res) => {
       setPost([res]);
     });
   };
 
-  const refetchPost= () => {
+  const refetchPost = () => {
     setPost([]);
     fetchPosts();
-  }
+  };
 
   useEffect(() => {
     fetchPosts();
@@ -52,13 +45,16 @@ export const Admin = () => {
         <div className="container">
           <br></br>
           <br></br> <br></br>
-     
           <h1>POSTS</h1>
-          <button className="btn btn-outline-success sm" onClick={refetchPost}>Refresh</button>
-         <br></br><br></br>
+          <p>total posts: {posts.length > 0 ? posts[0].data.length : ""}</p>
+          <button className="btn btn-outline-success sm" onClick={refetchPost}>
+            Refresh
+          </button>
+          <br></br>
+          <br></br>
           {posts.length > 0 ? <PostsSection posts={posts} /> : ""}
-          <br></br><br></br>
-    
+          <br></br>
+          <br></br>
         </div>
       </div>
     );

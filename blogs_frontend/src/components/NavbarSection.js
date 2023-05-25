@@ -26,7 +26,7 @@ export const NavbarSection = () => {
                   <Link to="/admin" className="nav-link active" aria-current="page" href="prova">Home</Link>
                 </li>
                 <li className="nav-item">
-                 <button onClick={logoutAdmin} className="btn btn-outline-success sm">LOGOUT</button>
+                 <button onClick={logoutAdmin} className="btn btn-primary sm">LOGOUT</button>
                 </li>
               </ul>
             </div>
