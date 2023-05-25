@@ -6,6 +6,8 @@ export const NavbarSection = () => {
     const navigate = useNavigate();
     const logoutAdmin = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("userType");
+        localStorage.removeItem("idUtente");
         navigate("/");
     }
 
@@ -24,6 +26,9 @@ export const NavbarSection = () => {
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
                   <Link to="/admin" className="nav-link active" aria-current="page" href="prova">Home</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/profile" className="nav-link active" aria-current="page" href="prova">Profile</Link>
                 </li>
                 <li className="nav-item">
                  <button onClick={logoutAdmin} className="btn btn-primary sm">LOGOUT</button>

@@ -33,11 +33,13 @@ const Homepage = () => {
        
           localStorage.setItem("token",res.data.token)
           localStorage.setItem("idUtente",res.data.id)
+          localStorage.setItem("userType","admin")
           navigate("/admin");
         } else if (res.data.login === true && res.data.isAdmin === false ) {
      
           localStorage.setItem("token",res.data.token)
           localStorage.setItem("idUtente",res.data.id)
+          localStorage.setItem("userType","user")
           navigate("/user");
         } else {
             console.log(res.data.message)
