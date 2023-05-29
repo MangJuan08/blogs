@@ -90,6 +90,26 @@ app.get("/datiUtente/:idUtente", (req, res, err) => {
   });
 });
 
+
+app.post("/updateProfile", (req,res,error) => {
+  let bodyReq = [];
+  bodyReq = Object.values(req.body);
+console.log(bodyReq)
+  let userData = {
+    idUtente: bodyReq[0].idUtente,
+    username: bodyReq[0].username,
+    password: bodyReq[0].password,
+    nome: bodyReq[0].nome,
+    cognome: bodyReq[0].cognome
+  };
+  con.connect((err) => {
+    con.query("UPDATE users SET username='" + userData.username +"', password='"+ userData.password+"', nome='"+userData.nome+"', cognome='"+userData.cognome+"' WHERE idUser = '"+userData.idUtente+"'", (error, result, fields) => {
+      res.send("success");
+    });
+  });
+  
+})
+
 const verifyJWT = (req, res, next) => {
   const token = req.headers["access-token"];
   if (!token) {
