@@ -72,7 +72,6 @@ export const Crud = () => {
 
   const checkNames = () => {
     setFileNames(acceptedFiles);
-   
   };
 
   const showNames = () => {
@@ -103,6 +102,10 @@ export const Crud = () => {
 
     setTableData(ef);
   };
+
+  const clearTable = () => {
+    setTableData([]);
+  };
   return (
     <div>
       <NavbarSection />
@@ -113,7 +116,7 @@ export const Crud = () => {
         <div className="container">
           <div
             {...getRootProps({
-              style
+              style,
             })}
           >
             <input {...getInputProps()} />
@@ -124,6 +127,7 @@ export const Crud = () => {
 
         <button onClick={checkNames}>check names</button>
         <button onClick={showNames}>show names</button>
+        <button onClick={clearTable}>clear table</button>
         <br></br>
         <br></br>
         {tableData.length > 0 ? (

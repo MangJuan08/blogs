@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [dati, setDati] = useState([]);
+  const [disableForm , setDisable] = useState(true);
   const [formData, setStateForm] = useState({
     username: "",
     password: "",
@@ -61,6 +62,9 @@ const Profile = () => {
       });
   };
 
+  const enableForm  = () => {
+    setDisable(false);
+  }
   useEffect(() => {
     getDatiUtente();
   }, []);
@@ -76,9 +80,10 @@ const Profile = () => {
           <br></br>
 
           <br></br>
-          <br></br>
-          <br></br>
-
+    
+        <button onClick={enableForm}>Enable Form</button>
+        <br></br>
+        <br></br>
           <form onSubmit={updateProfile}>
             <div className="input-group mb-3">
               <input
@@ -90,6 +95,7 @@ const Profile = () => {
                 aria-describedby="basic-addon1"
                 onChange={onValChange}
                 value={dati.length > 0 ? formData.username : ""}
+                disabled={disableForm}
               />
             </div>
 
@@ -103,6 +109,7 @@ const Profile = () => {
                 aria-describedby="basic-addon2"
                 onChange={onValChange}
                 value={dati.length > 0 ? formData.password : ""}
+                disabled={disableForm}
               />
             </div>
 
@@ -115,6 +122,7 @@ const Profile = () => {
                 placeholder="name@example.com"
                 onChange={onValChange}
                 value={dati.length > 0 ? formData.nome : ""}
+                disabled={disableForm}
               />
               <label htmlFor="floatingInput">Email address</label>
             </div>
@@ -127,6 +135,7 @@ const Profile = () => {
                 name="cognome"
                 onChange={onValChange}
                 value={dati.length > 0 ? formData.cognome : ""}
+                disabled={disableForm}
               />
               <label htmlFor="floatingPassword">Password</label>
             </div>
