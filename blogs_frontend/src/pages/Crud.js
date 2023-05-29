@@ -4,6 +4,7 @@ import { useDropzone } from "react-dropzone";
 import MaterialReactTable from "material-react-table";
 import { Box, IconButton, Tooltip } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
+import * as XLSX from "xlsx/xlsx";
 
 const baseStyle = {
   flex: 1,
@@ -106,6 +107,26 @@ export const Crud = () => {
   const clearTable = () => {
     setTableData([]);
   };
+
+
+    
+  const exportToCSV = () => {
+    if (tableData.length > 0) {
+      const ws = XLSX.utils.json_to_sheet(tableData);
+
+      /* add to workbook */
+      var wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "foglio");
+
+      /* generate an XLSX file */
+      XLSX.writeFile(wb, "Assegnazione_Restituzione.xlsx");
+alert("all goods");
+      setTableData([]);
+    } else {
+      alert("nessun dati da esportare");
+    }
+  };
+  
   return (
     <div>
       <NavbarSection />
@@ -113,21 +134,27 @@ export const Crud = () => {
       <div className="container">
         <h1>CRUD</h1>
         <br></br>
-        <div className="container">
-          <div
-            {...getRootProps({
-              style,
-            })}
-          >
-            <input {...getInputProps()} />
-            <p>Drag 'n' drop some files here, or click to select files</p>
+        {tableData.length > 0 ? (
+          ""
+        ) : (
+          <div className="container">
+            <div
+              {...getRootProps({
+                style,
+              })}
+            >
+              <input {...getInputProps()} />
+              <p>Drag 'n' drop some files here, or click to select files</p>
+            </div>
           </div>
-        </div>
+        )}
+
         <br></br>
 
         <button onClick={checkNames}>check names</button>
         <button onClick={showNames}>show names</button>
         <button onClick={clearTable}>clear table</button>
+        <button onClick={exportToCSV}>export data table</button>
         <br></br>
         <br></br>
         {tableData.length > 0 ? (
