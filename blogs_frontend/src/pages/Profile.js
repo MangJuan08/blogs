@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { NavbarSection } from "../components/NavbarSection";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const Profile = () => {
   const [dati, setDati] = useState([]);
-  const [disableForm , setDisable] = useState(true);
+  const [disableForm, setDisable] = useState(true);
   const [formData, setStateForm] = useState({
     username: "",
     password: "",
@@ -58,13 +59,18 @@ const Profile = () => {
         body: formBody,
       })
       .then((res) => {
-        console.log(res);
+       toast.success("UPDATE SUCCESSFULLY")
+    
       });
   };
 
-  const enableForm  = () => {
-    setDisable(false);
-  }
+  const enableForm = () => {
+    if (disableForm) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
+  };
   useEffect(() => {
     getDatiUtente();
   }, []);
@@ -80,10 +86,21 @@ const Profile = () => {
           <br></br>
 
           <br></br>
-    
-        <button onClick={enableForm}>Enable Form</button>
-        <br></br>
-        <br></br>
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckDefault"
+              onChange={enableForm}
+            />
+            <label class="form-check-label" for="flexSwitchCheckDefault">
+              {disableForm ? "Enable Form" : "Disable Form"}
+            </label>
+          </div>
+
+          <br></br>
+          <br></br>
           <form onSubmit={updateProfile}>
             <div className="input-group mb-3">
               <input
@@ -141,7 +158,9 @@ const Profile = () => {
             </div>
             <br></br>
             <br></br>
-            <button type="submit" className="btn btn-outline-primary">submit</button>
+            <button type="submit" className="btn btn-outline-primary">
+              submit
+            </button>
           </form>
           <br></br>
           <br></br>
