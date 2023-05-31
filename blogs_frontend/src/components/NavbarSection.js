@@ -31,7 +31,10 @@ export const NavbarSection = () => {
                   <Link to="/profile" className="nav-link active" aria-current="page" href="prova">Profile</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/crud" className="nav-link active" aria-current="page" href="prova">CRUD_OPERATIONS</Link>
+                  <Link to="/crud" className="nav-link active" aria-current="page" href="prova">CRUD</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/category" className="nav-link active" aria-current="page" href="prova">Categories</Link>
                 </li>
                 <li className="nav-item">
                  <button onClick={logoutAdmin} className="btn btn-primary sm">LOGOUT</button>

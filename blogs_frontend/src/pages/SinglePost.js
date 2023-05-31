@@ -34,6 +34,10 @@ const SinglePost = () => {
                   { post.length > 0 ? moment(post[0].data[0].post_date).format(
                     "MMMM Do YYYY, h:mm:ss a"
                   ) : " "} - Posted by: <cite>{ post.length > 0 ? post[0].data[0].username : ""}</cite>
+
+                  {
+                    post.length > 0 ? " Category type: "+  post[0].data[0].category_post : ""
+                  }
                 </figcaption>
               </figure>
     

@@ -6,6 +6,7 @@ import { User } from "./pages/User";
 import SinglePost from "./pages/SinglePost";
 import Profile from "./pages/Profile";
 import { Crud } from "./pages/Crud";
+import Category from "./pages/Category";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/singlePost/:idpost" element={<SinglePost/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/crud" element={<Crud/>}/>
+        <Route path="/category" element={<Category/>}/>
       </Routes>
     </div>
   );
