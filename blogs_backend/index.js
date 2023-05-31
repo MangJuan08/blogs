@@ -60,9 +60,12 @@ app.post("/login", (req, res) => {
 
 app.get("/getPosts", (req, res) => {
   con.connect((err) => {
-    con.query("SELECT * FROM posts, users WHERE post_iduser = idUser", (error, result, fields) => {
-      res.send(result);
-    });
+    con.query(
+      "SELECT * FROM posts, users WHERE post_iduser = idUser",
+      (error, result, fields) => {
+        res.send(result);
+      }
+    );
   });
 });
 
@@ -71,10 +74,12 @@ app.get("/getSinglePost/:id", (req, res) => {
 
   con.connect((err) => {
     con.query(
-      "SELECT * FROM posts,users WHERE post_iduser = idUser AND idpost='" + req.params.id + "'",
+      "SELECT * FROM posts,users WHERE post_iduser = idUser AND idpost='" +
+        req.params.id +
+        "'",
       (error, result, fields) => {
         res.send(result);
-        console.log(result)
+        console.log(result);
       }
     );
   });
@@ -91,25 +96,36 @@ app.get("/datiUtente/:idUtente", (req, res, err) => {
   });
 });
 
-
-app.post("/updateProfile", (req,res,error) => {
+app.post("/updateProfile", (req, res, error) => {
   let bodyReq = [];
   bodyReq = Object.values(req.body);
-console.log(bodyReq)
+  console.log(bodyReq);
   let userData = {
     idUtente: bodyReq[0].idUtente,
     username: bodyReq[0].username,
     password: bodyReq[0].password,
     nome: bodyReq[0].nome,
-    cognome: bodyReq[0].cognome
+    cognome: bodyReq[0].cognome,
   };
   con.connect((err) => {
-    con.query("UPDATE users SET username='" + userData.username +"', password='"+ userData.password+"', nome='"+userData.nome+"', cognome='"+userData.cognome+"' WHERE idUser = '"+userData.idUtente+"'", (error, result, fields) => {
-      res.send("success");
-    });
+    con.query(
+      "UPDATE users SET username='" +
+        userData.username +
+        "', password='" +
+        userData.password +
+        "', nome='" +
+        userData.nome +
+        "', cognome='" +
+        userData.cognome +
+        "' WHERE idUser = '" +
+        userData.idUtente +
+        "'",
+      (error, result, fields) => {
+        res.send("success");
+      }
+    );
   });
-  
-})
+});
 
 const verifyJWT = (req, res, next) => {
   const token = req.headers["access-token"];
