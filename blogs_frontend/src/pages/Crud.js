@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { NavbarSection } from "../components/NavbarSection";
 import { useDropzone } from "react-dropzone";
 import MaterialReactTable from "material-react-table";
@@ -106,8 +106,6 @@ export const Crud = () => {
     setTableData([]);
   };
 
-
-    
   const exportToCSV = () => {
     if (tableData.length > 0) {
       const ws = XLSX.utils.json_to_sheet(tableData);
@@ -118,13 +116,13 @@ export const Crud = () => {
 
       /* generate an XLSX file */
       XLSX.writeFile(wb, "Assegnazione_Restituzione.xlsx");
-alert("all goods");
+      alert("all goods");
       setTableData([]);
     } else {
       alert("nessun dati da esportare");
     }
   };
-  
+
   return (
     <div>
       <NavbarSection />

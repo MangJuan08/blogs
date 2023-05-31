@@ -1,16 +1,12 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import * as moment from "moment";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MaterialReactTable from "material-react-table";
 import { Box, Typography } from "@mui/material";
 
-const styleCards = {
-  marginBottom: "20px",
-};
 const PostsSection = ({ posts }) => {
-
   console.log(posts[0]);
-
+  const navigate = useNavigate();
   const columns = useMemo(
     () => [
       { accessorKey: "post_titolo", header: "Titolo", enableClickToCopy: true },
@@ -45,30 +41,25 @@ const PostsSection = ({ posts }) => {
             }}
           >
             <Typography>
-              <p>
-                <br></br>
-
-                <figure>
-                  <figcaption class="blockquote-footer">
-                    Posted when:{" "}
-                    {moment(posts[0].data.post_date).format(
-                      "MMMM Do YYYY, h:mm:ss a"
-                    )}
-                  </figcaption>
-                </figure>
-              </p>
+              <br></br>
+              <figure>
+                <figcaption class="blockquote-footer">
+                  Posted when:{" "}
+                  {moment(row.original.post_date).format(
+                    "MMMM Do YYYY, h:mm:ss a"
+                  )} - Posted by: <cite>{row.original.username}</cite>
+                </figcaption>
+              </figure>
             </Typography>
           </Box>
         )}
-
         muiTableBodyRowProps={({ row }) => ({
-          //implement row selection click events manually
           onClick: () => {
-            window.location.href="http://localhost:3000/singlePost/"+row.original.idpost;
-            console.log(row.original.idpost)
+      
+             navigate("/singlePost/" + row.original.idpost);
+            console.log(row.original.idpost);
           },
-          sx: { cursor: 'pointer' }
-           
+          sx: { cursor: "pointer" },
         })}
       />
     </div>

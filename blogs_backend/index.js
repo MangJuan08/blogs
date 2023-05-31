@@ -60,7 +60,7 @@ app.post("/login", (req, res) => {
 
 app.get("/getPosts", (req, res) => {
   con.connect((err) => {
-    con.query("SELECT * FROM posts", (error, result, fields) => {
+    con.query("SELECT * FROM posts, users WHERE post_iduser = idUser", (error, result, fields) => {
       res.send(result);
     });
   });
@@ -71,9 +71,10 @@ app.get("/getSinglePost/:id", (req, res) => {
 
   con.connect((err) => {
     con.query(
-      "SELECT * FROM posts where idpost='" + req.params.id + "'",
+      "SELECT * FROM posts,users WHERE post_iduser = idUser AND idpost='" + req.params.id + "'",
       (error, result, fields) => {
         res.send(result);
+        console.log(result)
       }
     );
   });
