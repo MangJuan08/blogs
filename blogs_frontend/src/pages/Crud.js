@@ -2,8 +2,6 @@ import React, { useMemo, useRef, useState } from "react";
 import { NavbarSection } from "../components/NavbarSection";
 import { useDropzone } from "react-dropzone";
 import MaterialReactTable from "material-react-table";
-import { Box, IconButton, Tooltip } from "@mui/material";
-import { Delete, Edit } from "@mui/icons-material";
 import * as XLSX from "xlsx/xlsx";
 
 const baseStyle = {
