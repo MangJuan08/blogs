@@ -4,7 +4,7 @@ const cors = require("cors");
 const mysql = require("mysql");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
-const moment = require('moment');
+const moment = require("moment");
 const app = express();
 const port = 3001;
 
@@ -128,29 +128,26 @@ app.post("/updateProfile", (req, res, error) => {
   });
 });
 
-app.post("/insertComment", (req,res, err) => {
-
- console.log(typeof(req.body.comment))
+app.post("/insertComment", (req, res, err) => {
   let commentData = {
-    comment:req.body.comment,
+    comment: req.body.comment,
     idUtente: req.body.id,
-    idPost: req.body.idPost
-  }
-  console.log(commentData)
+    idPost: req.body.idPost,
+  };
+  console.log(commentData);
   con.connect((err) => {
-    var sql = "INSERT INTO comments (commentText, fkidpost, fkiduser, datetime_posted) VALUES ("+moment.utc().format('YYYY-MM-DD HH:mm:ss Z')+")";
-    let myDate =   moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+    var sql =
+      "INSERT INTO comments (commentText, fkidpost, fkiduser, datetime_posted) VALUES ?";
+      
+    let myDate = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss");
+    let values = [[req.body.comment, req.body.idPost, req.body.id, myDate]];
 
-    let values = [req.body.comment, req.body.idPost, req.body.id, moment.utc().format('YYYY-MM-DD HH:mm:ss Z')]
- 
-    con.query(sql,
-      (error, result, fields) => {
-   console.log("error", error)
-      }
-    );
+    con.query(sql, [values], (error, result, fields) => {
+      console.log("result", error);
+    });
+
   });
-
-})
+});
 
 const verifyJWT = (req, res, next) => {
   const token = req.headers["access-token"];
