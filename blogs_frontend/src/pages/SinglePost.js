@@ -23,24 +23,43 @@ const SinglePost = () => {
     <div>
       <NavbarSection />
       <div className="container">
-        <br></br><br></br>
+        <br></br>
+        <br></br>
         {post.length > 0 ? <h1>{post[0].data[0].post_titolo}</h1> : ""}
-        <br></br><br></br>
+        <br></br>
+        <br></br>
         {post.length > 0 ? <p>{post[0].data[0].post_corpo}</p> : ""}
-        <br></br><br></br>
+        <br></br>
+        <br></br>
         <figure>
-        <figcaption class="blockquote-footer">
-                  Posted when:{" "}
-                  { post.length > 0 ? moment(post[0].data[0].post_date).format(
-                    "MMMM Do YYYY, h:mm:ss a"
-                  ) : " "} && Posted by: <cite>{ post.length > 0 ? post[0].data[0].username : ""}</cite>
-
-                  {
-                    post.length > 0 ? " Category type: "+  post[0].data[0].category_post : ""
-                  }
-                </figcaption>
-              </figure>
-    
+          <figcaption class="blockquote-footer">
+            Posted when:{" "}
+            {post.length > 0
+              ? moment(post[0].data[0].post_date).format(
+                  "MMMM Do YYYY, h:mm:ss a"
+                )
+              : " "}{" "}
+            && Posted by:{" "}
+            <cite>{post.length > 0 ? post[0].data[0].username : ""}</cite>
+            {post.length > 0
+              ? " Category type: " + post[0].data[0].category_post
+              : ""}
+          </figcaption>
+        </figure>
+        <div className="row">
+          <div className="col-12">
+            <div className="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">
+                Example textarea
+              </label>
+              <textarea
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
