@@ -9,7 +9,9 @@ const SinglePost = () => {
   let id = useParams();
   let val = Object.values(id);
   const idUtente = localStorage.getItem("idUtente");
-
+  const [commentBox, setStateForm] = useState({
+    comment: "",
+  });
   const fetchSinglePost = () => {
     axios.get(`http://localhost:3001/getSinglePost/${val[0]}`).then((res) => {
       setPost([res]);
@@ -18,12 +20,21 @@ const SinglePost = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e)
-  }
+    console.log(commentBox.comment)
+    console.log(idUtente);
+  };
+
+  const onValChange = (event) => {
+    const { name, value } = event.target;
+    setStateForm((prevProps) => ({
+      ...prevProps,
+      [name]: value,
+    }));
+  };
 
   useEffect(() => {
     fetchSinglePost();
-    console.log(idUtente)
+    console.log(idUtente);
   }, []);
 
   return (
@@ -60,9 +71,10 @@ const SinglePost = () => {
                 <textarea
                   placeholder="What's your opinion about the article?"
                   className="form-control"
-                  name="commentBox"
+                  name="comment"
                   rows="3"
                   style={{ width: "80ch" }}
+                  onChange={onValChange}
                 ></textarea>
               </div>
               <button className="btn btn-outline-primary">
