@@ -8,6 +8,7 @@ const SinglePost = () => {
   const [post, setPost] = useState([]);
   let id = useParams();
   let val = Object.values(id);
+  const idUtente = localStorage.getItem("idUtente");
 
   const fetchSinglePost = () => {
     axios.get(`http://localhost:3001/getSinglePost/${val[0]}`).then((res) => {
@@ -15,8 +16,14 @@ const SinglePost = () => {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e)
+  }
+
   useEffect(() => {
     fetchSinglePost();
+    console.log(idUtente)
   }, []);
 
   return (
@@ -32,7 +39,7 @@ const SinglePost = () => {
         <br></br>
         <br></br>
         <figure>
-          <figcaption class="blockquote-footer">
+          <figcaption className="blockquote-footer">
             Posted when:{" "}
             {post.length > 0
               ? moment(post[0].data[0].post_date).format(
@@ -48,16 +55,20 @@ const SinglePost = () => {
         </figure>
         <div className="row">
           <div className="col-12">
-            <div className="mb-3">
-              <label for="exampleFormControlTextarea1" class="form-label">
-                Example textarea
-              </label>
-              <textarea
-                class="form-control"
-                id="exampleFormControlTextarea1"
-                rows="3"
-              ></textarea>
-            </div>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <textarea
+                  placeholder="What's your opinion about the article?"
+                  className="form-control"
+                  name="commentBox"
+                  rows="3"
+                  style={{ width: "80ch" }}
+                ></textarea>
+              </div>
+              <button className="btn btn-outline-primary">
+                submit your comment
+              </button>
+            </form>
           </div>
         </div>
       </div>
