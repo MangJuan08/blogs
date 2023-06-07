@@ -20,8 +20,16 @@ const SinglePost = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(commentBox.comment)
+    console.log(commentBox.comment);
     console.log(idUtente);
+
+    axios
+      .post("http://localhost:3001/insertComment", {
+        comment: commentBox.comment,
+        id: idUtente,
+        idPost: val[0],
+      })
+      .then((res) => console.log(res));
   };
 
   const onValChange = (event) => {
