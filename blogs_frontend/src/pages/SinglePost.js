@@ -31,17 +31,17 @@ const SinglePost = () => {
         id: idUtente,
         idPost: val[0],
       })
-      .then((res) => console.log(res));
+      .then((res) => {
+        setList([]);
+        fetchComments();
+      });
   };
 
   const fetchComments = () => {
     axios
-    .get(`http://localhost:3001/getComments/${val[0]}`)
-    .then((res) => setList([res]));
-
-  }
- 
-
+      .get(`http://localhost:3001/getComments/${val[0]}`)
+      .then((res) => setList([res]));
+  };
 
   const onValChange = (event) => {
     const { name, value } = event.target;
@@ -104,7 +104,13 @@ const SinglePost = () => {
         </div>
         <br></br>
         <div className="row">
-          {commentList.length > 0 ? <CommentSection commentList = {commentList}/>: <p>no comments</p> }
+          <div className="col-md-12">
+            {commentList.length > 0 ? (
+              <CommentSection commentList={commentList} />
+            ) : (
+              <p>no comments</p>
+            )}
+          </div>
         </div>
       </div>
     </div>

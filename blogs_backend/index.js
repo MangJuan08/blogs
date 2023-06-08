@@ -143,7 +143,7 @@ app.post("/insertComment", (req, res, err) => {
     let values = [[req.body.comment, req.body.idPost, req.body.id, myDate]];
 
     con.query(sql, [values], (error, result, fields) => {
-      console.log("result", error);
+      res.send("completed")
     });
 
   });
