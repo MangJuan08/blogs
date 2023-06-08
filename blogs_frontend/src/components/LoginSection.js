@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 const LoginSection = ({ handleSubmit, login, setLogin }) => {
   return (
     <div className="container">
-   
-
       <div className="row">
         <div className="col-md-4"></div>
         <div className="col-md-4">
@@ -33,7 +31,10 @@ const LoginSection = ({ handleSubmit, login, setLogin }) => {
                   name="password"
                   onChange={(e) => setLogin(e.target.value)}
                 ></input>
-                <br></br><br></br><br></br><br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
                 <button type="submit" className="btn btn-outline-primary">
                   Submit
                 </button>
@@ -47,7 +48,6 @@ const LoginSection = ({ handleSubmit, login, setLogin }) => {
 };
 
 export default LoginSection;
-
 
 /*   <form
         className="row gx-3 gy-2 align-items-center"
