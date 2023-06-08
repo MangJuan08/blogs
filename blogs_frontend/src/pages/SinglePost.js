@@ -3,12 +3,14 @@ import { NavbarSection } from "../components/NavbarSection";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import * as moment from "moment";
+import CommentSection from "../components/CommentSection";
 
 const SinglePost = () => {
   const [post, setPost] = useState([]);
   let id = useParams();
   let val = Object.values(id);
   const idUtente = localStorage.getItem("idUtente");
+  const [commentList, setList] = useState([]);
   const [commentBox, setStateForm] = useState({
     comment: "",
   });
@@ -32,6 +34,15 @@ const SinglePost = () => {
       .then((res) => console.log(res));
   };
 
+  const fetchComments = () => {
+    axios
+    .get(`http://localhost:3001/getComments/${val[0]}`)
+    .then((res) => setList([res]));
+
+  }
+ 
+
+
   const onValChange = (event) => {
     const { name, value } = event.target;
     setStateForm((prevProps) => ({
@@ -42,7 +53,7 @@ const SinglePost = () => {
 
   useEffect(() => {
     fetchSinglePost();
-    console.log(idUtente);
+    fetchComments();
   }, []);
 
   return (
@@ -90,6 +101,10 @@ const SinglePost = () => {
               </button>
             </form>
           </div>
+        </div>
+        <br></br>
+        <div className="row">
+          {commentList.length > 0 ? <CommentSection commentList = {commentList}/>: <p>no comments</p> }
         </div>
       </div>
     </div>

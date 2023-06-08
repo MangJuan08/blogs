@@ -5,7 +5,6 @@ import MaterialReactTable from "material-react-table";
 import { Box, Typography } from "@mui/material";
 
 const PostsSection = ({ posts }) => {
-  console.log(posts[0]);
   const navigate = useNavigate();
   const columns = useMemo(
     () => [
@@ -30,7 +29,6 @@ const PostsSection = ({ posts }) => {
         enableStickyHeader
         enableColumnResizing
         enableColumnOrdering
-        getRowId={(row) => console.log(row.idpost)}
         renderDetailPanel={({ row }) => (
           <Box
             sx={{
@@ -47,7 +45,8 @@ const PostsSection = ({ posts }) => {
                   Posted when:{" "}
                   {moment(row.original.post_date).format(
                     "MMMM Do YYYY, h:mm:ss a"
-                  )} - Posted by: <cite>{row.original.username}</cite>
+                  )}{" "}
+                  - Posted by: <cite>{row.original.username}</cite>
                 </figcaption>
               </figure>
             </Typography>
@@ -55,9 +54,7 @@ const PostsSection = ({ posts }) => {
         )}
         muiTableBodyRowProps={({ row }) => ({
           onClick: () => {
-      
-             navigate("/singlePost/" + row.original.idpost);
-            console.log(row.original.idpost);
+            navigate("/singlePost/" + row.original.idpost);
           },
           sx: { cursor: "pointer" },
         })}

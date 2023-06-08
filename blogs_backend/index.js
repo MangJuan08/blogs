@@ -138,7 +138,7 @@ app.post("/insertComment", (req, res, err) => {
   con.connect((err) => {
     var sql =
       "INSERT INTO comments (commentText, fkidpost, fkiduser, datetime_posted) VALUES ?";
-      
+
     let myDate = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss");
     let values = [[req.body.comment, req.body.idPost, req.body.id, myDate]];
 
@@ -148,6 +148,18 @@ app.post("/insertComment", (req, res, err) => {
 
   });
 });
+
+app.get("/getComments/:idpost", (req,res,errors) => {
+  con.connect((err) => {
+    con.query(
+      `SELECT * FROM comments where fkidpost = ${req.params.idpost}`,
+      (error, result, fields) => {
+   res.send(result)
+      }
+    );
+  });
+});
+
 
 const verifyJWT = (req, res, next) => {
   const token = req.headers["access-token"];
