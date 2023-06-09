@@ -22,7 +22,7 @@ const CommentSection = ({ commentList }) => {
                      
                         <cite title="Source Title">   {moment(item.datetime_posted).format(
                           "MMMM Do YYYY, h:mm:ss a"
-                        )}{" "}</cite>
+                        )} by {item.username}</cite>
                       </footer>
                     </blockquote>
                   </div>

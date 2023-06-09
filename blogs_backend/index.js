@@ -152,7 +152,7 @@ app.post("/insertComment", (req, res, err) => {
 app.get("/getComments/:idpost", (req,res,errors) => {
   con.connect((err) => {
     con.query(
-      `SELECT * FROM comments where fkidpost = ${req.params.idpost}`,
+      `SELECT * FROM comments, posts, users where posts.idpost = comments.fkidpost AND users.idUser = comments.fkiduser AND comments.fkidpost = ${req.params.idpost}`,
       (error, result, fields) => {
    res.send(result)
       }
