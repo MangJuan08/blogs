@@ -60,31 +60,39 @@ const SinglePost = () => {
     <div>
       <NavbarSection />
       <div className="container">
-        <br></br>
-        <br></br>
-        {post.length > 0 ? <h1>{post[0].data[0].post_titolo}</h1> : ""}
-        <br></br>
-        <br></br>
-        {post.length > 0 ? <p>{post[0].data[0].post_corpo}</p> : ""}
-        <br></br>
-        <br></br>
-        <figure>
-          <figcaption className="blockquote-footer">
-            Posted when:{" "}
-            {post.length > 0
-              ? moment(post[0].data[0].post_date).format(
-                  "MMMM Do YYYY, h:mm:ss a"
-                )
-              : " "}{" "}
-            && Posted by:{" "}
-            <cite>{post.length > 0 ? post[0].data[0].username : ""}</cite>
-            {post.length > 0
-              ? " Category type: " + post[0].data[0].category_post
-              : ""}
-          </figcaption>
-        </figure>
         <div className="row">
-          <div className="col-12">
+          <div className="col-md-2">&nbsp;</div>
+          <div className="col-md-8">
+            <br></br>
+            <br></br>
+            {post.length > 0 ? <h1>{post[0].data[0].post_titolo}</h1> : ""}
+            <br></br>
+            <br></br>
+            {post.length > 0 ? <p>{post[0].data[0].post_corpo}</p> : ""}
+            <br></br>
+            <br></br>
+            <figure>
+              <figcaption className="blockquote-footer">
+                Posted when:{" "}
+                {post.length > 0
+                  ? moment(post[0].data[0].post_date).format(
+                      "MMMM Do YYYY, h:mm:ss a"
+                    )
+                  : " "}{" "}
+                && Posted by:{" "}
+                <cite>{post.length > 0 ? post[0].data[0].username : ""}</cite>
+                {post.length > 0
+                  ? " Category type: " + post[0].data[0].category_post
+                  : ""}
+              </figcaption>
+            </figure>
+          </div>
+          <div className="col-md-2"></div>
+        </div>
+
+        <div className="row">
+          <div className="col-md-2">&nbsp;</div>
+          <div className="col-md-8">
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <textarea
@@ -101,16 +109,19 @@ const SinglePost = () => {
               </button>
             </form>
           </div>
+          <div className="col-md-2"></div>
         </div>
         <br></br>
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-2">&nbsp;</div>
+          <div className="col-md-8">
             {commentList.length > 0 ? (
               <CommentSection commentList={commentList} />
             ) : (
               <p>no comments</p>
             )}
           </div>
+          <div className="col-md-2"></div>
         </div>
       </div>
     </div>
