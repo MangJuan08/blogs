@@ -7,6 +7,7 @@ import SinglePost from "./pages/SinglePost";
 import Profile from "./pages/Profile";
 import { Crud } from "./pages/Crud";
 import Category from "./pages/Category";
+import EsercitazioneTypescript from "./pages/EsercitazioneTypescript";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/crud" element={<Crud/>}/>
         <Route path="/category" element={<Category/>}/>
+        <Route path="/typescript" element={<EsercitazioneTypescript/>}/>
       </Routes>
     </div>
   );
