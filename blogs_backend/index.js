@@ -62,7 +62,7 @@ app.post("/login", (req, res) => {
 app.get("/getPosts", (req, res) => {
   con.connect((err) => {
     con.query(
-      "SELECT * FROM posts, users WHERE post_iduser = idUser",
+      "SELECT * FROM posts, users WHERE posts.post_iduser = users.idUser",
       (error, result, fields) => {
         res.send(result);
       }
