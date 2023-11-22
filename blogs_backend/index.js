@@ -81,6 +81,19 @@ app.get("/getCategories", (req, res) => {
   });
 });
 
+app.post("/getPostsOfCategory/:categoryName", (req, res) => {
+  console.log(req.params.categoryName)
+
+  con.connect((err) => {
+    con.query(
+      `SELECT  * FROM posts where category_post ="${req.params.categoryName}"`,
+      (error, result, fields) => {
+        res.send(result);
+      }
+    );
+  });
+});
+
 app.get("/getSinglePost/:id", (req, res) => {
   console.log(req.params.id);
 
