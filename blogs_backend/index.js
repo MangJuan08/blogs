@@ -33,11 +33,11 @@ app.post("/login", (req, res) => {
   con.connect((err) => {
     con.query(
       "SELECT * FROM users where username='" +
-        loginDetails.username +
-        "'" +
-        "&& password='" +
-        loginDetails.password +
-        "'",
+      loginDetails.username +
+      "'" +
+      "&& password='" +
+      loginDetails.password +
+      "'",
       (error, result, fields) => {
         if (result.length > 0) {
           let results = Object.values(JSON.parse(JSON.stringify(result)));
@@ -70,14 +70,25 @@ app.get("/getPosts", (req, res) => {
   });
 });
 
+app.get("/getCategories", (req, res) => {
+  con.connect((err) => {
+    con.query(
+      "SELECT DISTINCT category_post FROM posts",
+      (error, result, fields) => {
+        res.send(result);
+      }
+    );
+  });
+});
+
 app.get("/getSinglePost/:id", (req, res) => {
   console.log(req.params.id);
 
   con.connect((err) => {
     con.query(
       "SELECT * FROM posts,users WHERE post_iduser = idUser AND idpost='" +
-        req.params.id +
-        "'",
+      req.params.id +
+      "'",
       (error, result, fields) => {
         res.send(result);
         console.log(result);
@@ -111,16 +122,16 @@ app.post("/updateProfile", (req, res, error) => {
   con.connect((err) => {
     con.query(
       "UPDATE users SET username='" +
-        userData.username +
-        "', password='" +
-        userData.password +
-        "', nome='" +
-        userData.nome +
-        "', cognome='" +
-        userData.cognome +
-        "' WHERE idUser = '" +
-        userData.idUtente +
-        "'",
+      userData.username +
+      "', password='" +
+      userData.password +
+      "', nome='" +
+      userData.nome +
+      "', cognome='" +
+      userData.cognome +
+      "' WHERE idUser = '" +
+      userData.idUtente +
+      "'",
       (error, result, fields) => {
         res.send("success");
       }
@@ -149,16 +160,20 @@ app.post("/insertComment", (req, res, err) => {
   });
 });
 
-app.get("/getComments/:idpost", (req,res,errors) => {
+app.get("/getComments/:idpost", (req, res, errors) => {
   con.connect((err) => {
     con.query(
       `SELECT * FROM comments, posts, users where posts.idpost = comments.fkidpost AND users.idUser = comments.fkiduser AND comments.fkidpost = ${req.params.idpost}`,
       (error, result, fields) => {
-   res.send(result)
+        res.send(result)
       }
     );
   });
 });
+
+app.get("/deletePost/:idpost", (req, res, err) => {
+
+})
 
 
 const verifyJWT = (req, res, next) => {

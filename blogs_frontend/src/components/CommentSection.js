@@ -12,23 +12,23 @@ const CommentSection = ({ commentList }) => {
       <ul>
         {commentList[0].data.length > 0
           ? commentList[0].data.map((item, i) => (
-              <div>
-                <br></br>
-                <div class="card shadow " key={item.idcomment}>
-                  <div class="card-body">
-                    <blockquote class="blockquote mb-0">
-                      <p>{item.commentText}</p>
-                      <footer class="blockquote-footer">
-                     
-                        <cite title="Source Title">   {moment(item.datetime_posted).format(
-                          "MMMM Do YYYY, h:mm:ss a"
-                        )} by {item.username}</cite>
-                      </footer>
-                    </blockquote>
-                  </div>
+            <div key={item.idcomment}>
+              <br></br>
+              <div className="card shadow " >
+                <div className="card-body">
+                  <blockquote className="blockquote mb-0">
+                    <p>{item.commentText}</p>
+                    <footer className="blockquote-footer">
+
+                      <cite title="Source Title">   {moment(item.datetime_posted).format(
+                        "MMMM Do YYYY, h:mm:ss a"
+                      )} by {item.username}</cite>
+                    </footer>
+                  </blockquote>
                 </div>
               </div>
-            ))
+            </div>
+          ))
           : ""}
       </ul>
     </div>

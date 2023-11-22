@@ -1,24 +1,23 @@
 import React from "react";
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export const NavbarSection = () => {
-    const navigate = useNavigate();
-    const logoutAdmin = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("userType");
-        localStorage.removeItem("idUtente");
-        navigate("/");
-    }
+  const navigate = useNavigate();
+  const logoutAdmin = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userType");
+    localStorage.removeItem("idUtente");
+    navigate("/");
+  }
 
-    const token = localStorage.getItem("token");
-    if(token)
-    {
-        return (
-            <div>
+  const token = localStorage.getItem("token");
+  if (token) {
+    return (
+      <div>
         <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
           <div className="container">
-            <a className="navbar-brand" href="prova">DAJUAN</a>
+            <Link to="/admin" className="navbar-brand" aria-current="page" href="prova">DAJUAN</Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
@@ -37,29 +36,29 @@ export const NavbarSection = () => {
                   <Link to="/category" className="nav-link active" aria-current="page" href="prova">Categories</Link>
                 </li>
                 <li className="nav-item">
-                 <button onClick={logoutAdmin} className="btn btn-primary sm">LOGOUT</button>
+                  <button onClick={logoutAdmin} className="btn btn-primary sm">LOGOUT</button>
                 </li>
               </ul>
             </div>
           </div>
         </nav>
-            </div>
-          );  
-    }
+      </div>
+    );
+  }
 
-    else {
-        return (
-            <div>
+  else {
+    return (
+      <div>
         <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
           <div className="container">
             <a className="navbar-brand" href="prova">DAJUAN</a>
-   
+
           </div>
         </nav>
-            </div>
-          );  
+      </div>
+    );
 
-    }
+  }
 
 };
 

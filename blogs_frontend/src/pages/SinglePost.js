@@ -14,11 +14,16 @@ const SinglePost = () => {
   const [commentBox, setStateForm] = useState({
     comment: "",
   });
+
   const fetchSinglePost = () => {
     axios.get(`http://localhost:3001/getSinglePost/${val[0]}`).then((res) => {
       setPost([res]);
     });
   };
+
+  const deletePost = () => {
+    console.log(id)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,7 +45,7 @@ const SinglePost = () => {
   const fetchComments = () => {
     axios
       .get(`http://localhost:3001/getComments/${val[0]}`)
-      .then((res) => setList([res]));
+      .then((res) => { setList([res]); console.log(res.data[0]) });
   };
 
   const onValChange = (event) => {
@@ -66,6 +71,7 @@ const SinglePost = () => {
             <br></br>
             <br></br>
             {post.length > 0 ? <h1>{post[0].data[0].post_titolo}</h1> : ""}
+            <p><button onClick={deletePost}>delete post</button></p>
             <br></br>
             <br></br>
             {post.length > 0 ? <p>{post[0].data[0].post_corpo}</p> : ""}
@@ -76,8 +82,8 @@ const SinglePost = () => {
                 Posted when:{" "}
                 {post.length > 0
                   ? moment(post[0].data[0].post_date).format(
-                      "MMMM Do YYYY, h:mm:ss a"
-                    )
+                    "MMMM Do YYYY, h:mm:ss a"
+                  )
                   : " "}{" "}
                 && Posted by:{" "}
                 <cite>{post.length > 0 ? post[0].data[0].username : ""}</cite>

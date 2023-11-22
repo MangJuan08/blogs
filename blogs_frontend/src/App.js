@@ -7,6 +7,7 @@ import SinglePost from "./pages/SinglePost";
 import Profile from "./pages/Profile";
 import { Crud } from "./pages/Crud";
 import Category from "./pages/Category";
+import SingleCategory from "./pages/SingleCategory";
 
 
 
@@ -15,13 +16,14 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/admin" element={<Admin/>} />
-        <Route path="/user" element={<User/>} />
-        <Route path="/singlePost/:idpost" element={<SinglePost/>}/>
-        <Route path="/profile" element={<Profile/>}/>
-        <Route path="/crud" element={<Crud/>}/>
-        <Route path="/category" element={<Category/>}/>
-  
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/user" element={<User />} />
+        <Route path="/singlePost/:idpost" element={<SinglePost />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/crud" element={<Crud />} />
+        <Route path="/category" element={<Category />} />
+        <Route path="/singleCategory/:categoryName" element={<SingleCategory />} />
+
       </Routes>
     </div>
   );

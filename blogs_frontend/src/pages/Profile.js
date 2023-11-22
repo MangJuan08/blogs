@@ -35,6 +35,9 @@ const Profile = () => {
       .catch((err) => console.log(err));
   };
 
+
+  //update value
+
   const onValChange = (event) => {
     const { name, value } = event.target;
     setStateForm((prevProps) => ({
@@ -59,8 +62,7 @@ const Profile = () => {
         body: formBody,
       })
       .then((res) => {
-       toast.success("UPDATE SUCCESSFULLY")
-    
+        toast.success("UPDATE SUCCESSFULLY")
       });
   };
 
@@ -71,6 +73,7 @@ const Profile = () => {
       setDisable(true);
     }
   };
+
   useEffect(() => {
     getDatiUtente();
   }, []);
