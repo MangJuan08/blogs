@@ -82,12 +82,11 @@ app.get("/getCategories", (req, res) => {
 });
 
 app.post("/getPostsOfCategory/:categoryName", (req, res) => {
-  console.log(req.params.categoryName)
-
   con.connect((err) => {
     con.query(
       `SELECT  * FROM posts where category_post ="${req.params.categoryName}"`,
       (error, result, fields) => {
+        console.log(result)
         res.send(result);
       }
     );

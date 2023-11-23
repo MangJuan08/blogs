@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { NavbarSection } from "../components/NavbarSection";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const SingleCategory = () => {
     const [posts, setPost] = useState([]);
@@ -15,17 +16,14 @@ const SingleCategory = () => {
         let val = Object.values(categoryName);
 
         axios.post("http://localhost:3001/getPostsOfCategory/" + val.toString()).then((res) => {
-            console.log(res)
-            setPost([posts])
+            console.log(res.data)
+            setPost([res])
 
         });
     };
     useEffect(() => {
         fetchPostsCategry();
-        if (posts.length > 0) {
-            console.log("hello")
-        }
-        else { console.log("hi") }
+
     }, [])
 
     if (token) {
@@ -40,21 +38,20 @@ const SingleCategory = () => {
 
                             <ul className="list-group">
                                 {
-                                    /*posts.length > 0 ?
-                               
-                                        posts.data.map((item, index) => {
+                                    posts.length > 0 ?
 
-
-                                            return <li className="list-group-item" key={index}>{Object.values(item)}</li>
-                                        }
-
-                                        )
-                                        : ""*/}
+                                        posts[0].data.map((item, i) => {
+                                            return <li key={Object.values(item.idpost)}>
+                                                <Link to={`/singlePost/${Object.values(item.idpost)}`} href="prova" /><a href={`/singlePost/${Object.values(item.idpost)}`}> {Object.values(item.post_titolo)}</a>
+                                            </li>
+                                        })
+                                        : ""}
                             </ul>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
+
         )
     }
     else {
@@ -64,3 +61,4 @@ const SingleCategory = () => {
 }
 
 export default SingleCategory
+
