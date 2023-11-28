@@ -18,6 +18,7 @@ const SinglePost = () => {
   const fetchSinglePost = () => {
     axios.get(`http://localhost:3001/getSinglePost/${val[0]}`).then((res) => {
       setPost([res]);
+      console.log(res)
     });
   };
 

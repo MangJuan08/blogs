@@ -21,9 +21,20 @@ const SingleCategory = () => {
 
         });
     };
+
+    /*const tryController = () => {
+        axios.get("https://localhost:7260/api/Values").then((res) => {
+            console.log(res)
+        });
+    }*/
+
+    const getValuesObject = (item) => {
+        return Object.values(item.split(','));
+    }
+
     useEffect(() => {
         fetchPostsCategry();
-
+        /* tryController();*/
     }, [])
 
     if (token) {
@@ -32,6 +43,7 @@ const SingleCategory = () => {
                 <div className="container"><br></br><br></br>
                     <div className="row">
                         <div className="col-md-12"><h1>{Object.values(categoryName)}</h1></div>
+                        <br></br>
                     </div>
                     <div className="row">
                         <div className="col-md-12">
@@ -41,8 +53,9 @@ const SingleCategory = () => {
                                     posts.length > 0 ?
 
                                         posts[0].data.map((item, i) => {
-                                            return <li key={Object.values(item.idpost)}>
-                                                <Link to={`/singlePost/${Object.values(item.idpost)}`} href="prova" /><a href={`/singlePost/${Object.values(item.idpost)}`}> {Object.values(item.post_titolo)}</a>
+                                            return <li key={i} className="list-group-item">
+
+                                                <Link to={`/singlePost/${item.idpost}`}>   {getValuesObject(item.post_titolo)} </Link>
                                             </li>
                                         })
                                         : ""}
@@ -62,3 +75,6 @@ const SingleCategory = () => {
 
 export default SingleCategory
 
+
+
+/* <Link to={`/singlePost/${Object.values(item.idpost)}`}> {Object.values(item.post_titolo)}  </Link>*/
