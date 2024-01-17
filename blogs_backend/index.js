@@ -24,20 +24,20 @@ app.use(cookieParser());
 app.post("/login", (req, res) => {
   let bodyReq = [];
   bodyReq = Object.values(req.body);
-
+  console.log(Object.values(req.body));
   let loginDetails = {
-    username: bodyReq[0].username,
-    password: bodyReq[0].password,
+    username: bodyReq[0],
+    password: bodyReq[1],
   };
 
   con.connect((err) => {
     con.query(
       "SELECT * FROM users where username='" +
-      loginDetails.username +
-      "'" +
-      "&& password='" +
-      loginDetails.password +
-      "'",
+        loginDetails.username +
+        "'" +
+        "&& password='" +
+        loginDetails.password +
+        "'",
       (error, result, fields) => {
         if (result.length > 0) {
           let results = Object.values(JSON.parse(JSON.stringify(result)));
@@ -86,7 +86,7 @@ app.post("/getPostsOfCategory/:categoryName", (req, res) => {
     con.query(
       `SELECT  * FROM posts where category_post ="${req.params.categoryName}"`,
       (error, result, fields) => {
-        console.log(result)
+        console.log(result);
         res.send(result);
       }
     );
@@ -99,8 +99,8 @@ app.get("/getSinglePost/:id", (req, res) => {
   con.connect((err) => {
     con.query(
       "SELECT * FROM posts,users WHERE post_iduser = idUser AND idpost='" +
-      req.params.id +
-      "'",
+        req.params.id +
+        "'",
       (error, result, fields) => {
         res.send(result);
         console.log(result);
@@ -134,16 +134,16 @@ app.post("/updateProfile", (req, res, error) => {
   con.connect((err) => {
     con.query(
       "UPDATE users SET username='" +
-      userData.username +
-      "', password='" +
-      userData.password +
-      "', nome='" +
-      userData.nome +
-      "', cognome='" +
-      userData.cognome +
-      "' WHERE idUser = '" +
-      userData.idUtente +
-      "'",
+        userData.username +
+        "', password='" +
+        userData.password +
+        "', nome='" +
+        userData.nome +
+        "', cognome='" +
+        userData.cognome +
+        "' WHERE idUser = '" +
+        userData.idUtente +
+        "'",
       (error, result, fields) => {
         res.send("success");
       }
@@ -166,9 +166,8 @@ app.post("/insertComment", (req, res, err) => {
     let values = [[req.body.comment, req.body.idPost, req.body.id, myDate]];
 
     con.query(sql, [values], (error, result, fields) => {
-      res.send("completed")
+      res.send("completed");
     });
-
   });
 });
 
@@ -177,16 +176,13 @@ app.get("/getComments/:idpost", (req, res, errors) => {
     con.query(
       `SELECT * FROM comments, posts, users where posts.idpost = comments.fkidpost AND users.idUser = comments.fkiduser AND comments.fkidpost = ${req.params.idpost}`,
       (error, result, fields) => {
-        res.send(result)
+        res.send(result);
       }
     );
   });
 });
 
-app.get("/deletePost/:idpost", (req, res, err) => {
-
-})
-
+app.get("/deletePost/:idpost", (req, res, err) => {});
 
 const verifyJWT = (req, res, next) => {
   const token = req.headers["access-token"];
